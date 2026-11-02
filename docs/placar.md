@@ -10,7 +10,8 @@ Aplicações vulneráveis de propósito, rodando só na máquina local (Docker),
 |---|---|
 | [OWASP Juice Shop](https://owasp.org/www-project-juice-shop/) | Loja moderna em Node e Angular, falhas do OWASP Top 10 e de API |
 | [DVWA](https://github.com/digininja/DVWA) | PHP clássico, injeção e upload |
-| [OWASP crAPI](https://github.com/OWASP/crAPI) | API com falhas de autorização (BOLA, BFLA, mass assignment) |
+
+O OWASP crAPI (autorização de API) saiu da lista em 02/11/2026: sobe vários containers e pede de 3 a 4 GB de RAM, e o Juice Shop já tem desafios de autorização de API no gabarito.
 
 Pra frente jurídica e de qualidade, os alvos são sites reais do autor, publicados só depois de corrigidos (ver [casos](casos/)).
 
