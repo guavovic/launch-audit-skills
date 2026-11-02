@@ -4,6 +4,8 @@ Cada mudança entra em `Não lançado` e vai pra seção da versão quando ela s
 
 ## Não lançado
 
+- O OWASP crAPI saiu dos alvos do placar: pede de 3 a 4 GB de RAM e o Juice Shop já cobre autorização de API (#3).
+
 ## v0.1.0 (27/10/2026)
 
 Primeira versão numerada, com o que existe hoje.
