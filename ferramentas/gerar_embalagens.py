@@ -264,7 +264,7 @@ A mesma auditoria passiva rodou em cada ferramenta em 02/11/2026 (detalhe em `do
 | OpenAI Codex | Testado. No Windows, o `codex exec` só roda comando com `-c windows.sandbox="unelevated"` e aprovação: com o sandbox padrão todo comando é bloqueado |
 | Gemini CLI | Testado, como extensão por `gemini extensions link` |
 | Cursor | Testado, com o subagente. O Cursor também lê hooks e skills de `~/.claude`: um hook do Claude Code vale lá e pode quebrar o terminal do agente, e uma skill instalada nos dois lugares aparece duas vezes |
-| GitHub Copilot | Ainda não testado (issue #14) |
+| GitHub Copilot | Testado no Copilot CLI, com o subagente. Sem interação, liberar só as ferramentas necessárias com `--allow-tool` (Python e escrita) |
 """
 
 

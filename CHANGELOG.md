@@ -4,7 +4,7 @@ Cada mudança entra em `Não lançado` e vai pra seção da versão quando ela s
 
 ## Não lançado
 
-- A mesma auditoria passiva testada em cada ferramenta: passou no Claude Code, no OpenAI Codex, no Gemini CLI e no Cursor; o GitHub Copilot segue sem teste. Resultado em `docs/placar/ferramentas-2026-11-02.md` (#14).
+- A mesma auditoria passiva testada em cada ferramenta: passou no Claude Code, no OpenAI Codex, no Gemini CLI, no Cursor e no GitHub Copilot (Copilot CLI). Resultado em `docs/placar/ferramentas-2026-11-02.md` (#14).
 - Embalagens: o `name` do frontmatter sai sem aspas. O Cursor lia as aspas como parte do nome e não achava o subagente (#14).
 - README com uma seção de instalação por ferramenta, no mesmo nível, cada uma com o status do teste (#14).
 - O OWASP crAPI saiu dos alvos do placar: pede de 3 a 4 GB de RAM e o Juice Shop já cobre autorização de API (#3).
