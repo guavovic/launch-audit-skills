@@ -1,5 +1,5 @@
 ---
-name: "auditoria-site"
+name: auditoria-site
 description: "Audita se um site está pronto pra lançar e se mantém saudável: formulários que funcionam de ponta a ponta (validação, confirmação, página de obrigado, bloqueio de envio duplo), página 404, links quebrados, domínio próprio com HTTPS e e-mail configurado (SPF, DKIM, DMARC), velocidade (PageSpeed, Core Web Vitals, imagens comprimidas, teste em rede móvel), SEO (title e meta description únicos, sitemap.xml, robots.txt, canonical, dados estruturados, Search Console, palavras-chave), prévia social (favicon, og:image), analytics com eventos e funil de desistência, monitor de uptime, rastreamento de erro, rodapé com dados, e itens de conversão (CTA fixo no mobile, FAQ, avaliações e cases reais, Google Meu Negócio e mapa quando for negócio local). Diz o que se aplica ao tipo de site. Use quando o usuário pedir \"o site tá pronto?\", \"checklist de lançamento\", \"auditoria do site\", \"SEO do site\", \"por que o site tá lento?\", \"revisão do site\", ou a revisão periódica de 3 a 6 meses."
 ---
 

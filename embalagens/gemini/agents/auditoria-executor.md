@@ -1,5 +1,5 @@
 ---
-name: "auditoria-executor"
+name: auditoria-executor
 description: "Executa a parte braçal de uma auditoria das skills auditoria-seguranca, auditoria-legal e auditoria-site num projeto do usuário: roda Lighthouse, o script de checagem passiva, npm audit, buscas de segredo e de padrões no código, checagens no navegador (Playwright) e devolve os resultados brutos resumidos, com evidência. Use quando a conversa principal já decidiu o perfil do projeto e o que verificar; nunca pra classificar severidade, escrever o relatório final, corrigir código ou testar alvo que não seja do usuário."
 ---
 

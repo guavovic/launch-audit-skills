@@ -1,5 +1,5 @@
 ---
-name: "auditoria-seguranca"
+name: auditoria-seguranca
 description: "Audita a segurança real de um site, API ou aplicativo do usuário: descobre o perfil do projeto, decide quais proteções fazem sentido (e quais seriam exagero), varre o código e a configuração atrás de segredo exposto, falha de controle de acesso (IDOR/BOLA), injeção (SQL, XSS, prompt), SSRF, CSRF, CORS, autenticação e sessão fracas, upload sem validação, erro que vaza código, rota de debug, falta de rate limit e anti-bot, dependência vulnerável ou inventada, e operação (logs, backup, rollback, alerta). Testa de forma ativa só no local, e em produção só de forma passiva. Use quando o usuário pedir \"o projeto tá seguro?\", \"auditoria de segurança\", \"valida a segurança\", \"pentest\", \"tem brecha?\", \"checa se vaza env\", \"precisa de WAF / rate limit / 2FA?\", \"antes de lançar\", ou mandar um repo/URL pra revisar a segurança."
 ---
 
