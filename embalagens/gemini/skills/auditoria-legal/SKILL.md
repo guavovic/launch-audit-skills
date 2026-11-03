@@ -1,5 +1,5 @@
 ---
-name: "auditoria-legal"
+name: auditoria-legal
 description: "Audita os riscos jurídicos de um site ou aplicativo no Brasil pra não ser processado nem multado: LGPD (base legal, só dados necessários, direitos do titular, encarregado, incidente), aviso e preferência de cookies, scripts de rastreamento e Google Analytics, política de privacidade, termos de uso, política de troca e reembolso e direito de arrependimento (CDC), dados legais da empresa no rodapé (Decreto 7.962), Marco Civil (guarda de logs), ECA Digital (público infantil), acessibilidade (LBI e WCAG: alt nas imagens, contraste, teclado), direitos autorais de imagem e fonte, marca, promessa ou depoimento falso, e-mail marketing, Pix e gateway, GDPR e jogo com ranking online. Diz o que se aplica ao tipo de projeto e o que não. Use quando o usuário pedir \"o site pode ser processado?\", \"tá dentro da LGPD?\", \"precisa de política de privacidade / termos / aviso de cookies?\", \"auditoria jurídica\", \"conformidade\", \"acessibilidade do site\", \"preciso do GDPR?\", ou antes de lançar algo que coleta dado ou vende."
 ---
 

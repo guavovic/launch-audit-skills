@@ -2,7 +2,7 @@
 
 # launch-audit-skills
 
-Skills pro Claude Code que auditam site, API ou aplicativo **antes de ir ao ar**, em três frentes: **segurança**, **risco jurídico no Brasil** e **qualidade de lançamento**. Toda conclusão vem com evidência, e o relatório também diz o que o projeto **não precisa**.
+Skills de agente (formato aberto [Agent Skills](https://agentskills.io)) que auditam site, API ou aplicativo **antes de ir ao ar**, em três frentes: **segurança**, **risco jurídico no Brasil** e **qualidade de lançamento**. Toda conclusão vem com evidência, e o relatório também diz o que o projeto **não precisa**. Testadas em 02/11/2026 no Claude Code, no OpenAI Codex, no Gemini CLI e no Cursor.
 
 ![licença](https://img.shields.io/github/license/guavovic/launch-audit-skills?style=flat-square&label=licen%C3%A7a)
 
@@ -18,7 +18,7 @@ Skills pro Claude Code que auditam site, API ou aplicativo **antes de ir ao ar**
 | `auditoria-legal` | "O site pode ser processado?" | LGPD, cookies e rastreamento, política de privacidade, termos, CDC e direito de arrependimento, Decreto 7.962, Marco Civil, ECA Digital, acessibilidade (LBI e WCAG 2.2), direito autoral, publicidade enganosa |
 | `auditoria-site` | "O site está pronto?" | Formulários de ponta a ponta, 404, links, HTTPS e e-mail do domínio, Core Web Vitals, SEO técnico, prévia social, analytics e funil, uptime, rastreamento de erro |
 
-Junto vêm um **script de checagem passiva** (Python sem dependências, saída em JSON, compara com a rodada anterior) e o subagente **`auditoria-executor`**, que roda a parte braçal num modelo mais barato.
+Junto vêm um **script de checagem passiva** (Python sem dependências, saída em JSON, compara com a rodada anterior) e o subagente **`auditoria-executor`**, que roda a parte braçal (script, Lighthouse, buscas) e devolve a evidência. Na ferramenta sem subagente, o agente principal faz essa parte com as mesmas regras.
 
 ## Como pensa
 
@@ -29,22 +29,40 @@ Junto vêm um **script de checagem passiva** (Python sem dependências, saída e
 
 ## Instalação
 
-Como plugin do Claude Code, dentro de uma sessão:
+A fonte fica em `skills/` e `agents/`. Cada ferramenta tem uma cópia pronta em [`embalagens/`](embalagens/), com o lugar exato de cada arquivo no [`embalagens/README.md`](embalagens/README.md). Copie as três skills juntas: as skills legal e site usam o script da skill de segurança pela pasta vizinha. O teste em cada ferramenta está em [docs/placar/ferramentas-2026-11-02.md](docs/placar/ferramentas-2026-11-02.md).
+
+### Claude Code
+
+Testado em 02/11/2026. Como plugin, dentro de uma sessão:
 
 ```
 /plugin marketplace add guavovic/launch-audit-skills
 /plugin install launch-audit-skills@launch-audit-skills
 ```
 
-Ou pelo terminal, com `claude plugin marketplace add guavovic/launch-audit-skills` e `claude plugin install launch-audit-skills@launch-audit-skills`. O plugin traz as três skills e o subagente `auditoria-executor`. As skills são chamadas pelo pedido ("audita a segurança desse projeto", "o site tá pronto pra lançar?") ou pelo nome, como `/launch-audit-skills:auditoria-seguranca`. Pra receber as mudanças depois: `/plugin marketplace update launch-audit-skills`.
+Ou pelo terminal, com `claude plugin marketplace add guavovic/launch-audit-skills` e `claude plugin install launch-audit-skills@launch-audit-skills`. As skills são chamadas pelo pedido ("audita a segurança desse projeto", "o site tá pronto pra lançar?") ou pelo nome, como `/launch-audit-skills:auditoria-seguranca`. Pra receber as mudanças depois: `/plugin marketplace update launch-audit-skills`.
 
-Sem plugin, também dá pra copiar as pastas de `skills/` pra `~/.claude/skills/` e o arquivo de `agents/` pra `~/.claude/agents/`. Use um jeito ou o outro, não os dois juntos, senão cada skill aparece duas vezes.
+Sem plugin, copie as pastas de `skills/` pra `~/.claude/skills/` e o arquivo de `agents/` pra `~/.claude/agents/`. Use um jeito ou o outro, não os dois juntos, senão cada skill aparece duas vezes.
 
-### Outras ferramentas
+### OpenAI Codex
 
-As skills seguem o formato aberto de Agent Skills, então a mesma fonte gera embalagens pro OpenAI Codex, o Gemini CLI, o Cursor e o GitHub Copilot, em [`embalagens/`](embalagens/), com o lugar de cada uma no [`embalagens/README.md`](embalagens/README.md). Elas existem, mas ainda não foram testadas em cada ferramenta: esse teste é a [#14](https://github.com/guavovic/launch-audit-skills/issues/14), e só depois dele o README passa a dizer que funciona lá. Onde a ferramenta não tiver subagente, o agente principal faz a parte braçal com as mesmas regras.
+Testado em 02/11/2026. Copie `embalagens/codex/.agents/` e `embalagens/codex/.codex/` pra raiz do projeto (ou as skills em `~/.agents/skills/` e o agente em `~/.codex/agents/`). No Windows, o `codex exec` só roda comando com `-c windows.sandbox="unelevated"` e aprovação.
 
-Regras só suas (alvos que não podem ser tocados, onde salvar o relatório, qual perfil de navegador usar) vão num `regras-locais.md` dentro da pasta de cada skill. Ele é lido antes de tudo e fica fora do git. Na instalação por plugin a pasta é substituída a cada atualização, então quem usa regras locais prefere a cópia manual (ou um link pra um clone do repositório).
+### Gemini CLI
+
+Testado em 02/11/2026, com o modelo `gemini-3.5-flash-lite` porque a cota grátis do dia do modelo padrão tinha acabado. `gemini extensions install <clone>/embalagens/gemini`, ou `gemini extensions link` pra acompanhar o clone.
+
+### Cursor
+
+Testado em 02/11/2026. Copie `embalagens/cursor/.cursor/` pra raiz do projeto (ou skills e agente em `~/.cursor/skills/` e `~/.cursor/agents/`). O Cursor também lê hooks e skills de `~/.claude`, então um hook do Claude Code vale lá.
+
+### GitHub Copilot
+
+Ainda não testado ([#14](https://github.com/guavovic/launch-audit-skills/issues/14)). Copie `embalagens/copilot/.github/` pra raiz do repositório (no Copilot CLI, skills e agente também valem em `~/.copilot/skills/` e `~/.copilot/agents/`).
+
+### Regras locais
+
+Regras só suas (alvos que não podem ser tocados, onde salvar o relatório, qual perfil de navegador usar) vão num `regras-locais.md` dentro da pasta de cada skill. Ele é lido antes de tudo e fica fora do git. Na instalação por plugin do Claude Code a pasta é substituída a cada atualização, então quem usa regras locais prefere a cópia manual (ou um link pra um clone do repositório).
 
 ## Limites
 

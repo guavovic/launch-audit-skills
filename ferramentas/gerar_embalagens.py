@@ -91,7 +91,8 @@ def yaml_texto(valor):
 def frontmatter(campos):
     linhas = []
     for chave, valor in campos.items():
-        linhas.append(f"{chave}: {valor if valor in ('true', 'false', 'inherit') else yaml_texto(valor)}")
+        sem_aspas = chave == "name" or valor in ("true", "false", "inherit")
+        linhas.append(f"{chave}: {valor if sem_aspas else yaml_texto(valor)}")
     return "---\n" + "\n".join(linhas) + "\n---\n"
 
 
@@ -254,7 +255,16 @@ Copie as três skills juntas, lado a lado: as skills legal e site usam o script 
 
 Cursor sem MCP: as skills não têm servidor, o script roda pelo terminal do agente.
 
-Nenhuma dessas embalagens foi testada na ferramenta ainda. O teste de cada uma é a issue #14.
+## Teste por ferramenta
+
+A mesma auditoria passiva rodou em cada ferramenta em 02/11/2026 (detalhe em `docs/placar/ferramentas-2026-11-02.md`):
+
+| Ferramenta | Status |
+|---|---|
+| OpenAI Codex | Testado. No Windows, o `codex exec` só roda comando com `-c windows.sandbox="unelevated"` e aprovação: com o sandbox padrão todo comando é bloqueado |
+| Gemini CLI | Testado, como extensão por `gemini extensions link` |
+| Cursor | Testado, com o subagente. O Cursor também lê hooks e skills de `~/.claude`: um hook do Claude Code vale lá e pode quebrar o terminal do agente, e uma skill instalada nos dois lugares aparece duas vezes |
+| GitHub Copilot | Ainda não testado (issue #14) |
 """
 
 
