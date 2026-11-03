@@ -15,7 +15,7 @@ A mesma auditoria rodou em cada ferramenta de agente que tem embalagem em [`emba
 
 Observações de método:
 
-- Cada ferramenta rodou sem interação (`claude -p`, `codex exec`, `gemini -p`, `cursor-agent -p`), com o mínimo de permissão que deixasse o script rodar: nada de modo "aceita tudo".
+- Cada ferramenta rodou sem interação (`claude -p`, `codex exec`, `gemini -p`, `cursor-agent -p`, `copilot -p`), com o mínimo de permissão que deixasse o script rodar: nada de modo "aceita tudo".
 - A Vercel bloqueia o IP por alguns minutos depois das requisições a `/.env` e `/.git` que a checagem passiva faz. As rodadas que chegaram a rodar o script ficaram com uns 10 minutos ou mais entre uma e outra.
 - "Achados batem" compara o resumo do `passiva.json` de cada ferramenta com o do Claude Code e confere se o relatório cita os mesmos avisos.
 - Nenhuma embalagem ficou instalada fora da pasta de teste no fim. A extensão do Gemini foi ligada por `gemini extensions link` e desligada depois.
@@ -24,16 +24,16 @@ Observações de método:
 
 | | Claude Code | OpenAI Codex | Gemini CLI | Cursor | GitHub Copilot |
 |---|---|---|---|---|---|
-| Versão e modelo | 2.1.316, `claude-opus-5-5` | CLI 0.166.0, `gpt-6-luna` | 0.66.0, `gemini-3.5-flash-lite` | CLI 2026.10.22, modelo Auto | não rodou |
+| Versão e modelo | 2.1.316, `claude-opus-5-5` | CLI 0.166.0, `gpt-6-luna` | 0.66.0, `gemini-3.5-flash-lite` | CLI 2026.10.22, modelo Auto | CLI 1.0.105, `gpt-5.6-luna` (Auto) |
 | Embalagem | junction em `~/.claude/skills` | `.agents/skills` e `.codex/agents` na pasta | extensão (`embalagens/gemini`) | `.cursor/` na pasta | `.github/` |
-| Skill achada e carregada | sim, pela ferramenta de skill | sim, leu o `SKILL.md` | sim, `activate_skill` | sim, leu o `SKILL.md` e a regra `.mdc` | |
-| Script rodou | sim | sim, com caminho relativo à pasta | sim, com o caminho que a extensão deu | sim | |
-| Subagente | não, o agente principal fez a parte braçal | não, o agente principal fez a parte braçal | não, o agente principal fez a parte braçal | sim, `auditoria-executor` rodou o script | |
-| Matriz do que se aplica | sim | sim | sim | sim | |
-| Resumo do `passiva.json` | 43 ok, 5 info, 3 avisos | 43 ok, 5 info, 3 avisos | 43 ok, 5 info, 3 avisos | 42 ok, 5 info, 3 avisos, 1 bloqueado | |
-| Achados batem | referência | sim | sim | sim (o bloqueado é o anti-bot da Vercel) | |
-| Tempo | cerca de 70 s | cerca de 40 s | cerca de 35 s | cerca de 76 s | |
-| Status | passou | passou com ressalva | passou com ressalva | passou com ressalva | não testado |
+| Skill achada e carregada | sim, pela ferramenta de skill | sim, leu o `SKILL.md` | sim, `activate_skill` | sim, leu o `SKILL.md` e a regra `.mdc` | sim, pela ferramenta de skill |
+| Script rodou | sim | sim, com caminho relativo à pasta | sim, com o caminho que a extensão deu | sim | sim, pelo subagente |
+| Subagente | não, o agente principal fez a parte braçal | não, o agente principal fez a parte braçal | não, o agente principal fez a parte braçal | sim, `auditoria-executor` rodou o script | sim, `auditoria-executor` rodou o script |
+| Matriz do que se aplica | sim | sim | sim | sim | sim |
+| Resumo do `passiva.json` | 43 ok, 5 info, 3 avisos | 43 ok, 5 info, 3 avisos | 43 ok, 5 info, 3 avisos | 42 ok, 5 info, 3 avisos, 1 bloqueado | 43 ok, 5 info, 3 avisos |
+| Achados batem | referência | sim | sim | sim (o bloqueado é o anti-bot da Vercel) | sim |
+| Tempo | cerca de 70 s | cerca de 40 s | cerca de 35 s | cerca de 76 s | cerca de 90 s |
+| Status | passou | passou com ressalva | passou com ressalva | passou com ressalva | passou |
 
 Os três avisos são os mesmos em todas: CORS com `*` na home (sem credencial), dois `h1` na página inicial e detalhe técnico na página 404. Nenhuma falha. O Claude Code foi o único que citou o Turnstile na CSP; os outros não erraram, só não comentaram.
 
@@ -58,11 +58,10 @@ A segunda rodada, com a correção do nome e com a pasta de usuário isolada (se
 
 ### GitHub Copilot
 
-Não rodou: na máquina de teste o comando `copilot` é só o atalho do VS Code e responde que o Copilot CLI não está instalado. Fica "ainda não testado" no README até o teste com o Copilot CLI autenticado (#14).
+Na rodada da noite, o comando `copilot` era só o atalho do VS Code. Depois de instalar o Copilot CLI (1.0.105), ele entrou pela conta do `gh` sem login à parte, achou as três skills de `.github/skills` e rodou com `copilot -p`, liberando só Python, curl e escrita por `--allow-tool`. O subagente `auditoria-executor` rodou o script e o resultado bateu com o do Claude Code. Um comando de PowerShell fora da lista foi negado (sem ninguém pra aprovar) e o agente seguiu por outro caminho, sem inventar resultado.
 
 ## O que ficou de fora
 
-- Copilot, pelo motivo acima.
 - Gemini no modelo padrão, por cota.
 - Codex e Cursor fora do Windows.
 - As skills `auditoria-legal` e `auditoria-site`. Elas usam o mesmo script e a mesma estrutura de embalagem, mas não rodaram nesta rodada.

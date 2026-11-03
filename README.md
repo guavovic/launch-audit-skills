@@ -2,7 +2,7 @@
 
 # launch-audit-skills
 
-Skills de agente (formato aberto [Agent Skills](https://agentskills.io)) que auditam site, API ou aplicativo **antes de ir ao ar**, em três frentes: **segurança**, **risco jurídico no Brasil** e **qualidade de lançamento**. Toda conclusão vem com evidência, e o relatório também diz o que o projeto **não precisa**. Testadas em 02/11/2026 no Claude Code, no OpenAI Codex, no Gemini CLI e no Cursor.
+Skills de agente (formato aberto [Agent Skills](https://agentskills.io)) que auditam site, API ou aplicativo **antes de ir ao ar**, em três frentes: **segurança**, **risco jurídico no Brasil** e **qualidade de lançamento**. Toda conclusão vem com evidência, e o relatório também diz o que o projeto **não precisa**. Testadas em 02/11/2026 no Claude Code, no OpenAI Codex, no Gemini CLI, no Cursor e no GitHub Copilot.
 
 ![licença](https://img.shields.io/github/license/guavovic/launch-audit-skills?style=flat-square&label=licen%C3%A7a)
 
@@ -58,7 +58,7 @@ Testado em 02/11/2026. Copie `embalagens/cursor/.cursor/` pra raiz do projeto (o
 
 ### GitHub Copilot
 
-Ainda não testado ([#14](https://github.com/guavovic/launch-audit-skills/issues/14)). Copie `embalagens/copilot/.github/` pra raiz do repositório (no Copilot CLI, skills e agente também valem em `~/.copilot/skills/` e `~/.copilot/agents/`).
+Testado em 02/11/2026 no Copilot CLI. Copie `embalagens/copilot/.github/` pra raiz do repositório (no Copilot CLI, skills e agente também valem em `~/.copilot/skills/` e `~/.copilot/agents/`).
 
 ### Regras locais
 
