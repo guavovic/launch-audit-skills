@@ -1,6 +1,6 @@
 # guavovic-website
 
-Primeira rodada real das três skills, em 21/10/2026, no portfólio pessoal do autor ([guavovic.vercel.app](https://guavovic.vercel.app)). Os achados abaixo foram todos corrigidos em 22/10/2026, antes desta publicação.
+Primeira rodada real das três skills, em 21/10/2026, no portfólio pessoal do autor ([guavovic.com](https://guavovic.com)). Os achados abaixo foram todos corrigidos em 22/10/2026, antes desta publicação.
 
 ## O projeto
 
